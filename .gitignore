@@ -1,0 +1,12 @@
+.vagrant
+.tmp
+tmp
+node_modules
+npm-debug.log
+logs/*
+.DS_Store
+src/index.css
+src/index.js
+src/index-full-paths.js
+src/sandbox.jsx
+/*.html

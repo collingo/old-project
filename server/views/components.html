@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>DEAL Components</title>
+    <link rel='stylesheet' href="/app.css" />
+  </head>
+  <body>
+    <h1>DEAL Components</h1>
+    <ul>
+      <% components.forEach(function (component) { %>
+        <li><a href="/components/<%= component %>"><%= component %></a></li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

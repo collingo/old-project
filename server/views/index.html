@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Shelflife App</title>
+    <link rel='stylesheet' href="/app.css" />
+  </head>
+  <body>
+    <main id="stage">
+      <h1>Shelflife</h1>
+    </main>
+    <script type="text/javascript" src="/app.js"></script>
+    <% if(page) { %>
+      <script type="text/javascript">Actions.goTo('<%= page %>');</script>
+    <% } %>
+  </body>
+</html>

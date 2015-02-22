@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '0.10'
+install:
+- npm install -g npm@2.4.1
+- npm install
+script: npm test src/lib/**/*test.js src/components/**/*.js
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+  - master

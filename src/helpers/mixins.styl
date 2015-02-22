@@ -1,0 +1,82 @@
+slide() {
+  // TODO: Refactor to take out position and use transform
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: transform .32s ease-in-out;
+  transform: translateX(0%);
+  
+  &.slide-enter {
+    transform: translateX(100%);
+  }
+  &.slide-enter-active,
+  &.slide-leave {
+    transform: translateX(0%);
+  }
+  &.slide-leave-active {
+    transform: translateX(-100%);
+  }
+  
+  &.slide-reverse-enter {
+    transform: translateX(-100%);
+  }
+  &.slide-reverse-enter-active,
+  &.slide-reverse-leave {
+    transform: translateX(0%);
+  }
+  &.slide-reverse-leave-active {
+    transform: translateX(100%);
+  }
+}
+
+fade(time = .32s) {
+  transition: opacity time ease-in-out;
+  
+  &.fade-enter {
+    opacity: 0;
+  }
+  &.fade-enter-active,
+  &.fade-leave {
+    opacity: 1;
+  }
+  &.fade-leave-active {
+    opacity: 0;
+  }
+}
+
+collapse(itemHeight = 5rem, time = .32s) {
+  transition: unquote('height') time ease-in-out;
+  
+  &.collapse-enter,
+  &.collapse-enter-active,
+  &.collapse-leave,
+  &.collapse-leave-active {
+    padding:0;
+  }
+  &.collapse-enter {
+    height: 0rem;
+  }
+  &.collapse-enter-active,
+  &.collapse-leave {
+    height: itemHeight;
+  }
+  &.collapse-leave-active {
+    height: 0rem;
+  }
+}
+
+scale() {
+  transition: all .32s ease-in-out;
+  
+  &.modal-enter {
+    transform: scale(0.5);
+  }
+  &.modal-enter-active,
+  &.modal-leave {
+    transform: scale(1);
+  }
+  &.modal-leave-active {
+    transform: scale(0.5);
+  }
+}

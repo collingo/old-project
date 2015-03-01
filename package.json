@@ -8,7 +8,6 @@
     "prestart": "npm install",
     "start": "node server",
     "debug": "DEBUG=express:* node server",
-    "test": "mocha --compilers js:babel/register",
     "compile": "browserify -dt reactify src/app.jsx -o src/app.js && echo \"Compiled\"",
     "watch": "watchify -dt reactify src/app.jsx -o src/app.js",
     "compileFullPaths": "browserify --full-paths -dt reactify src/app.jsx -o src/app-full-paths.js && echo \"Compiled with full paths\""

@@ -48,6 +48,6 @@ app.use(express.static(srcPath));
 
 routes.initialize(app, path, __dirname);
 
-app.listen(8888, function () {
+app.listen(8080, function () {
   console.log('App up and running');
 });

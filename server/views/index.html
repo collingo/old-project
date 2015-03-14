@@ -9,9 +9,9 @@
     <main id="stage">
       <h1>Shelflife</h1>
     </main>
+    <script type="text/javascript">
+      var urls = <%= urls %>;
+    </script>
     <script type="text/javascript" src="/app.js"></script>
-    <% if(page) { %>
-      <script type="text/javascript">Actions.goTo('<%= page %>');</script>
-    <% } %>
   </body>
 </html>

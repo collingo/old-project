@@ -1,7 +1,8 @@
 FROM node:0.10
 MAINTAINER Nick Collings <nick@collingo.com>
 
-RUN apt-get update -qyy
+RUN apt-get update -qyy \
+	&& apt-get install -qyy redis-server
 
 RUN mkdir -p /home/app
 WORKDIR /home/app

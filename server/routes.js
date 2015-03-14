@@ -4,35 +4,10 @@ var browserify = require('browserify');
 var glob = require('glob');
 var helpers = require('./helpers');
 
+var redis = require('redis');
+var redisClient = redis.createClient();
+
 module.exports.initialize = function (app, path, basepath) {
-  app.get('/sandbox.js', function (req, res, next) {
-    var sandbox = path.join(basepath, '../src', 'sandbox.jsx');
-    var b = browserify();
-
-    res.setHeader('content-type', 'text/javascript');
-
-    b.require('react', {expose: 'react'});
-    helpers.getAllComponentNames(function (componentNames) {
-      componentNames.forEach(function (componentName) {
-        var component = path.join(basepath, '../src/components/' + componentName + '/view.jsx');
-        b.require(component, {expose: componentName});
-      });
-      b.require(sandbox, {expose: 'sandbox'});
-      b.bundle()
-        .on('error', function (error) {
-          var errorMessage = [error.name, ': "', error.description, '" in ', error.filename, ' at line number ', error.lineNumber].join('');
-          console.error(errorMessage, error);
-          // due to Chrome not displaying response data in non 200 states need to expose the error message via a console.error
-          res.send('console.error(\'' + errorMessage + '\');');
-        })
-        .pipe(res);
-    });
-  });
-
-  app.get('/sandbox', function (req, res) {
-    res.render('sandbox');
-  });
-
   app.get('/components/:component.js', function (req, res, next) {
     var filename = path.join(basepath, '../src/components', req.params.component, 'view.jsx');
     var sandbox = path.join(basepath, '../src/components', req.params.component, 'sandbox.jsx');
@@ -74,9 +49,14 @@ module.exports.initialize = function (app, path, basepath) {
     });
   });
 
-  app.get('/:page?', function (req, res) {
-    res.render('index', {
-      page: req.params.page
+  app.get('*', function (req, res) {
+    redisClient.select(3, function () {
+      redisClient.hmget(['urls', 'collingo'], function (err, urls) {
+        console.log(urls[0]);
+        res.render('index', {
+          urls: urls[0]
+        });
+      });
     });
   });
 };

@@ -1,22 +1,14 @@
-var Dispatcher = require('./dispatcher');
-var Constants = require('./constants');
+var Store = require('./store');
 var _findWhere = require('lodash/collection/findWhere');
-// require('es6-promise').polyfill();
-// require('isomorphic-fetch');
 
 var Actions = {
 
   toggleEditMode: function () {
-    Dispatcher.handleAction({
-      actionType: Constants.TOGGLE_EDIT
-    });
+    Store.toggleEdit();
   },
 
   removeArticle: function (article) {
-    Dispatcher.handleAction({
-      actionType: Constants.REMOVE_ARTICLE,
-      article: article
-    });
+    Store.removeArticle(article);
   }
 
 };

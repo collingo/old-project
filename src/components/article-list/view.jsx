@@ -1,5 +1,4 @@
-var React = require('react');
-var addons = require('react/addons');
+var React = require('react/addons');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var Item = require('../article-list-item/view.jsx');
 

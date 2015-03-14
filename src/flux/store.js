@@ -1,10 +1,8 @@
-var Dispatcher = require('./dispatcher');
-var Constants = require('./constants');
 var EventEmitter = require('events').EventEmitter;
-var _assign = require('lodash/object/assign');
-var _findWhere = require('lodash/collection/findWhere');
-var _findIndex = require('lodash/array/findIndex');
-var _reject = require('lodash/collection/reject');
+var assign = require('lodash/object/assign');
+var findWhere = require('lodash/collection/findWhere');
+var findIndex = require('lodash/array/findIndex');
+var reject = require('lodash/collection/reject');
 
 var _data = {
   editing: false,
@@ -41,7 +39,7 @@ var _data = {
   }]
 };
 
-var Store = _assign({}, EventEmitter.prototype, {
+var Store = assign({}, EventEmitter.prototype, {
 
   getData: function () {
     return _data;
@@ -57,28 +55,22 @@ var Store = _assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function (callback) {
     this.removeListener('change', callback);
+  },
+
+  // store actions
+
+  toggleEdit() {
+    _data.editing = !_data.editing;
+    Store.emitChange();
+  },
+
+  removeArticle(articleToDelete) {
+    _data.articles = reject(_data.articles, (article) => {
+      return article === articleToDelete;
+    });
+    Store.emitChange();
   }
 
-});
-
-Dispatcher.register(function (payload) {
-  var action = payload.action;
-  switch(action.actionType) {
-    case Constants.TOGGLE_EDIT:
-      _data.editing = !_data.editing;
-      break;
-
-    case Constants.REMOVE_ARTICLE:
-      _data.articles = _reject(_data.articles, function (article) {
-        return article === action.article;
-      });
-      break;
-
-    default:
-      return true;
-  }
-  Store.emitChange();
-  return true;
 });
 
 window.Store = Store;

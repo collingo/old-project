@@ -24,12 +24,14 @@ var ArticleListItem = {
   },
   getPriority: function (datetime) {
     var saved = moment(datetime);
-    var diff = moment().diff(saved, 'days');
+    var diff = 7 - moment().diff(saved, 'days');
+    console.log(diff);
     return 'p'+diff;
   },
   onClick: function (event) {
     event.preventDefault();
     console.log('Visit "' + this.props.article.url + '"');
+    window.open(this.props.article.url);
   },
   onDeleteClick: function (event) {
     event.preventDefault();
